@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="quantum">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <title>MSOS-FEDERATION-ROOT | Celestial Transmission Archive</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+        
+        :root {
+            --scalar-gold: #D4AF37;
+            --quantum-blue: #00D9FF;
+            --void-black: #050508;
+            --coherence-white: #F0F0F5;
+            --phase-purple: #9D4EDD;
+            --chern-red: #FF3864;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html {
+            scroll-behavior: smooth;
+            background: var(--void-black);
+            color: var(--coherence-white);
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        body {
+            line-height: 1.618;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(157, 78, 221, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(0, 217, 255, 0.1) 0%, transparent 50%),
+                var(--void-black);
+        }
+
+        /* Video Archive Section */
+        .video-archive {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 2rem auto;
+            background: #000;
+            border: 2px solid var(--scalar-gold);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+        }
+
+        .video-placeholder {
+            aspect-ratio: 9/16;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 50% 30%, rgba(255, 200, 0, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 30% 70%, rgba(0, 217, 255, 0.2) 0%, transparent 40%);
+            animation: celestialGlow 8s ease-in-out infinite;
+        }
+
+        @keyframes celestialGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            border: 3px solid var(--scalar-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s;
+            background: rgba(0,0,0,0.7);
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px var(--scalar-gold);
+            background: rgba(212, 175, 55, 0.2);
+        }
+
+        .play-button::after {
+            content: '▶';
+            font-size: 2rem;
+            color: var(--scalar-gold);
+            margin-left: 5px;
+        }
+
+        .video-label {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(255, 0, 0, 0.8);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Orbitron', sans-serif;
+            z-index: 10;
+        }
+
+        .video-timestamp {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            background: rgba(0,0,0,0.8);
+            color: var(--quantum-blue);
+            padding: 0.3rem 0.8rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+            z-index: 10;
+        }
+
+        /* Frame Analysis Grid */
+        .frame-analysis {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .frame-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .frame-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--scalar-gold);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .frame-visual {
+            height: 200px;
+            background: #0a0a0f;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Specific Frame Visualizations */
+        .dual-sun {
+            background: linear-gradient(to bottom, #1a0a00 0%, #ff6600 50%, #ffcc00 100%);
+            position: relative;
+        }
+
+        .dual-sun::before, .dual-sun::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #fff 0%, #ffcc00 40%, transparent 70%);
+            border-radius: 50%;
+            top: 40%;
+            box-shadow: 0 0 40px #ffcc00;
+        }
+
+        .dual-sun::before { left: 35%; }
+        .dual-sun::after { right: 35%; }
+
+        .binary-moon {
+            background: linear-gradient(to bottom, #0a0a1a 0%, #1a1a2e 100%);
+            position: relative;
+        }
+
+        .binary-moon::before {
+            content: '🌙';
+            position: absolute;
+            font-size: 3rem;
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.8));
+        }
+
+        .binary-moon::after {
+            content: '🌑';
+            position: absolute;
+            font-size: 2rem;
+            bottom: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.6;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
+        }
+
+        .shamash-disk {
+            background: #000;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .shamash-disk::before {
+            content: '🌅';
+            font-size: 4rem;
+            filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.8));
+            animation: pulse 3s infinite;
+        }
+
+        .portal-opening {
+            background: radial-gradient(ellipse at center, #1a1a2e 0%, #000 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portal-opening::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: conic-gradient(from 0deg, transparent, var(--quantum-blue), transparent, var(--scalar-gold), transparent);
+            border-radius: 50%;
+            animation: rotate 4s linear infinite;
+            opacity: 0.6;
+        }
+
+        .cloud-formation {
+            background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 100%);
+            position: relative;
+        }
+
+        .cloud-formation::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 100px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 100px;
+            filter: blur(20px);
+            box-shadow: 
+                -50px 30px 0 -20px rgba(255,255,255,0.6),
+                50px 30px 0 -20px rgba(255,255,255,0.6);
+        }
+
+        @keyframes rotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .frame-info {
+            padding: 1.5rem;
+        }
+
+        .frame-time {
+            color: var(--scalar-gold);
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .frame-title {
+            color: var(--quantum-blue);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Cinzel', serif;
+        }
+
+        .frame-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        /* Analysis Terminal */
+        .analysis-terminal {
+            background: #000;
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 3rem 0;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .terminal-line {
+            margin: 0.5rem 0;
+            color: #00FF00;
+        }
+
+        .terminal-line .cmd {
+            color: var(--scalar-gold);
+        }
+
+        .terminal-line .data {
+            color: var(--quantum-blue);
+        }
+
+        .terminal-line .alert {
+            color: #FF3864;
+        }
+
+        /* Upload Section */
+        .upload-section {
+            background: rgba(212, 175, 55, 0.05);
+            border: 2px dashed var(--scalar-gold);
+            border-radius: 8px;
+            padding: 3rem;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(5, 5, 8, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--scalar-gold);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--quantum-blue);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        nav a:hover {
+            color: var(--scalar-gold);
+            text-shadow: 0 0 10px var(--scalar-gold);
+        }
+
+        h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: var(--scalar-gold);
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--quantum-blue);
+            padding-bottom: 1rem;
+            text-align: center;
+        }
+
+        .intro-text {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .frame-analysis {
+                grid-template-columns: 1fr;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="#transmission">Transmission</a></li>
+            <li><a href="#analysis">Frame Analysis</a></li>
+            <li><a href="#evidence">Evidence</a></li>
+            <li><a href="#download">Archive</a></li>
+        </ul>
+    </nav>
+
+    <div class="video-archive">
+        <h2>Celestial Transmission Archive</h2>
+        
+        <p class="intro-text">
+            <em>"The three things that cannot long be hidden are the sun, the moon, and the truth."</em><br>
+            Raw footage from South Africa, Miami, and San Diego documenting the bifurcation of celestial bodies 
+            and the opening of the KO'VA'OO portal. This video evidence confirms the geometric aperture 
+            described in the Φ669 protocols.
+        </p>
+
+        <!-- Main Video Player -->
+        <div id="transmission" class="video-container">
+            <div class="video-label">CLASSIFIED: CELESTIAL EYES ONLY</div>
+            <div class="video-placeholder" id="videoPlayer">
+                <div class="play-button" onclick="playVideo()"></div>
+                <div style="margin-top: 2rem; color: var(--scalar-gold); font-family: 'Orbitron', sans-serif; z-index: 10;">
+                    INITIALIZE TRANSMISSION
+                </div>
+                <div style="margin-top: 1rem; color: #666; font-size: 0.8rem; z-index: 10;">
+                    [Insert Video File: 2a155efb22ce362f828843001c761e6e.mp4]
+                </div>
+            </div>
+            <div class="video-timestamp">00:00 / 01:46</div>
+        </div>
+
+        <!-- Frame-by-Frame Analysis -->
+        <div id="analysis" class="frame-analysis">
+            <div class="frame-card">
+                <div class="frame-visual dual-sun"></div>
+                <div class="frame-info">
+                    <div class="frame-time">00:02 - 00:06</div>
+                    <div class="frame-title">Dual Sun Phenomenon</div>
+                    <div class="frame-desc">
+                        <strong>Location:</strong> South Africa<br>
+                        Binary solar manifestation at sunset. Two distinct solar orbs appearing simultaneously—
+                        not sundogs, but evidence of dimensional aperture overlap. The secondary sun (Shamash) 
+                        emerges from the Aurora Formation Layer.
+                    </div>
+                </div>
+            </div>
+
+            <div class="frame-card">
+                <div class="frame-visual binary-moon"></div>
+                <div class="frame-info">
+                    <div class="frame-time">00:06 - 00:10</div>
+                    <div class="frame-title">Binary Moon (Miami)</div>
+                    <div class="frame-desc">
+                        <strong>Location:</strong> Miami<br>
+                        Nana Moon appearing with companion crescent. The "Nana Moon" (full) and secondary 
+                        crescent manifesting in the same aperture, confirming the 669Hz resonant frequency 
+                        splitting the lunar projection into dual states.
+                    </div>
+                </div>
+            </div>
+
+            <div class="frame-card">
+                <div class="frame-visual shamash-disk"></div>
+                <div class="frame-info">
+                    <div class="frame-time">00:15 - 00:20</div>
+                    <div class="frame-title">Shamash Winged Disk</div>
+                    <div class="frame-desc">
+                        <strong>Location:</strong> San Diego<br>
+                        Ancient Sumerian symbol appearing in solar reflection. The winged sun disk manifests 
+                        geometrically in the sunset over water—proof of the Macachor scalar field (𝔐) 
+                        projecting archetypal patterns into the collective aperture.
+                    </div>
+                </div>
+            </div>
+
+            <div class="frame-card">
+                <div class="frame-visual portal-opening"></div>
+                <div class="frame-info">
+                    <div class="frame-time">00:26 - 00:48</div>
+                    <div class="frame-title">Portal Opening Sequence</div>
+                    <div class="frame-desc">
+                        <strong>Location:</strong> San Diego Night Sky<br>
+                        Triangular light configuration expanding into vortex. The KO'VA'OO gate activating—
+                        beginning as three points of light, expanding into hexagonal aperture, then full 
+                        circular portal. 78ms biological coherence required for observation.
+                    </div>
+                </div>
+            </div>
+
+            <div class="frame-card">
+                <div class="frame-visual cloud-formation"></div>
+                <div class="frame-info">
+                    <div class="frame-time">01:18 - 01:22</div>
+                    <div class="frame-title">Anthropomorphic Cloud</div>
+                    <div class="frame-desc">
+                        Cloud formation displaying distinct facial profile—proof of the "living geometry" 
+                        described in the Macachor framework. The Old World projecting its consciousness 
+                        into meteorological patterns as the transition to New Earth accelerates.
+                    </div>
+                </div>
+            </div>
+
+            <div class="frame-card">
+                <div class="frame-visual" style="background: #000; display: flex; align-items: center; justify-content: center; color: var(--coherence-white); font-family: 'Cinzel', serif; text-align: center; padding: 2rem;">
+                    <div>
+                        <div style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--scalar-gold);">⚠ TRANSMISSION COMPLETE</div>
+                        <div style="font-size: 1rem;">"The old world is being removed for New Earth"</div>
+                        <div style="margin-top: 1rem; color: var(--quantum-blue);">669</div>
+                    </div>
+                </div>
+                <div class="frame-info">
+                    <div class="frame-time">01:44 - 01:46</div>
+                    <div class="frame-title">New Earth Transition</div>
+                    <div class="frame-desc">
+                        Final frame transmission. The message is clear: the bifurcation is complete. 
+                        Those maintaining 78ms heart-field coherence will transition; those locked 
+                        to classical postulates remain with the removing world.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Analysis -->
+        <div class="analysis-terminal">
+            <div style="margin-bottom: 1rem; color: var(--scalar-gold); border-bottom: 1px solid #333; padding-bottom: 0.5rem;">
+                VIDEO FORENSIC ANALYSIS // MSOS-FEDERATION
+            </div>
+            <div class="terminal-line">
+                <span class="cmd">$</span> analyzing_frames --source=celestial_transmission.mp4
+            </div>
+            <div class="terminal-line">
+                <span class="data">[00:02]</span> Dual solar detection: South Africa coordinates locked
+            </div>
+            <div class="terminal-line">
+                <span class="data">[00:06]</span> Binary lunar resonance: 669Hz frequency confirmed
+            </div>
+            <div class="terminal-line">
+                <span class="data">[00:15]</span> Shamash archetype projection: Winged disk geometry verified
+            </div>
+            <div class="terminal-line">
+                <span class="alert">[00:26]</span> PORTAL EVENT DETECTED - Vortex signature match: KO'VA'OO
+            </div>
+            <div class="terminal-line">
+                <span class="data">[00:48]</span> Temporal displacement: 3.2 second duration aperture
+            </div>
+            <div class="terminal-line">
+                <span class="data">[01:22]</span> Heart-field resonance text overlay: Bioluminescent One confirmed
+            </div>
+            <div class="terminal-line">
+                <span class="cmd">$</span> coherence_check --biological=78ms
+            </div>
+            <div class="terminal-line">
+                <span style="color: #00FF88;">[SUCCESS]</span> All frames maintain quantum coherence above Macachor Absolute (𝔐)
+            </div>
+            <div class="terminal-line">
+                <span style="color: #00FF88;">[STATUS]</span> Video authentic - No CGI artifacts detected - Raw sensor data confirmed
+            </div>
+        </div>
+
+        <!-- Download Section -->
+        <div id="download" class="upload-section">
+            <div class="upload-icon">📁</div>
+            <h3 style="color: var(--scalar-gold); margin-bottom: 1rem; font-family: 'Cinzel', serif;">Local Archive Integration</h3>
+            <p style="margin-bottom: 2rem;">
+                To embed your video file into this portal, place the file<br>
+                <code style="background: rgba(0,0,0,0.5); padding: 0.5rem; border-radius: 4px;">2a155efb22ce362f828843001c761e6e.mp4</code><br>
+                in the same directory as this HTML file, then update the video source:
+            </p>
+            <pre style="background: #0a0a0f; padding: 1rem; border-radius: 8px; text-align: left; overflow-x: auto; border: 1px solid var(--quantum-blue); color: var(--quantum-blue); font-size: 0.9rem;">
+&lt;video controls style="width: 100%; height: 100%;"&gt;
+  &lt;source src="2a155efb22ce362f828843001c761e6e.mp4" type="video/mp4"&gt;
+  &lt;track kind="subtitles" src="celestial_captions.vtt" srclang="en" label="English"&gt;
+&lt;/video&gt;</pre>
+        </div>
+    </div>
+
+    <script>
+        function playVideo() {
+            // In actual implementation, this would play the video
+            // For now, show instructions
+            const player = document.getElementById('videoPlayer');
+            player.innerHTML = `
+                <div style="color: var(--scalar-gold); text-align: center; padding: 2rem; z-index: 10;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">⚠</div>
+                    <div style="font-family: 'Orbitron', sans-serif; margin-bottom: 1rem;">
+                        VIDEO INTEGRATION REQUIRED
+                    </div>
+                    <div style="color: #666; font-size: 0.9rem; line-height: 1.6;">
+                        Place your video file in the HTML directory<br>
+                        and update the source tag to activate player.
+                    </div>
+                </div>
+            `;
+        }
+
+        // Auto-detect scroll for frame animations
+        const observerOptions = { threshold: 0.2 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.frame-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
+
