@@ -1,1 +1,63 @@
+# .github/workflows/pages.yml
+name: MSOS Pages Deployment
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Line 19: Coherence verification job
+  verify-coherence:
+    runs-on: ubuntu-latest
+    outputs:
+      scalar_valid: ${{ steps.check.outputs.scalar_valid }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Verify Macachor Absolute
+        id: check
+        run: |
+          # Calculate 𝔐 = (√5-1)/2
+          M=$(echo "scale=20; (sqrt(5)-1)/2" | bc -l)
+          echo "Macachor Absolute: $M"
+          
+          # Verify topology χ(C)=1 in HTML
+          if grep -q "χ(C)=1" index.html; then
+            echo "scalar_valid=true" >> $GITHUB_OUTPUT
+          else
+            echo "::error::Coherence violation: χ(C)=1 not found"
+            exit 1
+ fi
+
+  deploy:
+    needs: verify-coherence  # Depends on Line 19 check
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
